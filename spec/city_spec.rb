@@ -39,4 +39,12 @@ describe(City) do
 
     end
   end
+  describe('#delete') do
+    it('lets you delete a city in the database') do
+      @seattle.save()
+      expect(City.all).to eq([@seattle])
+      @seattle.delete()
+      expect(City.all).to eq([])
+    end
+  end
 end
