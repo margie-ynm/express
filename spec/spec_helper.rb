@@ -1,6 +1,6 @@
 require('rspec')
-require('person')
-require('animal')
+require('city')
+require('train')
 require('pg')
 
 DB = PG.connect({:dbname => 'express_test'})
