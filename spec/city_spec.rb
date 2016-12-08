@@ -3,6 +3,8 @@ require('spec_helper.rb')
 describe(City) do
   before(:each) do
     @seattle = City.new({:name => "Seattle"})
+    @portland = City.new({:name => "Portland"})
+    @eugene = City.new({:name => "Eugene"})
   end
   describe('#intialize') do
     it('add attributes to class') do
@@ -36,7 +38,7 @@ describe(City) do
       @seattle.save()
       @seattle.update({:name => "Seattle, WA"})
       expect(@seattle.name).to eq("Seattle, WA")
-
+      expect(City.find(@seattle.id).name).to eq("Seattle, WA")
     end
   end
   describe('#delete') do
@@ -45,6 +47,14 @@ describe(City) do
       expect(City.all).to eq([@seattle])
       @seattle.delete()
       expect(City.all).to eq([])
+    end
+  end
+  describe('.find') do
+    it('lets you search for a city by id') do
+      @seattle.save
+      @portland.save
+      @eugene.save
+      expect(City.find(@seattle.id)).to eq(@seattle)
     end
   end
 end

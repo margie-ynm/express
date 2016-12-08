@@ -2,7 +2,7 @@
 
 <ul>
   <% @cities.each do |city| %>
-    <li><%= city.name %></li>
+    <li><a href="/cities/<%= city.id %>"><%= city.name %></a></li>
   <% end %>
 </ul>
 

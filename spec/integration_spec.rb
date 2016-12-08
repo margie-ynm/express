@@ -21,4 +21,20 @@ describe("City RESTful routes", {:type => :feature}) do
       expect(page).to have_content('Seattle, WA')
     end
   end
+  describe("GET individual city") do
+    it('allows a user to visit a single page for city') do
+      portland = City.new({:name => "Portland, OR"}).save()
+      visit("/cities/#{portland.id}")
+      expect(page).to have_content('Portland, OR')
+    end
+  end
+  describe("PATCH city") do
+    it('allows a user to update a city') do
+      portland = City.new({:name => "Poland, OR"}).save()
+      visit("/cities/#{portland.id}/edit")
+      fill_in('city-name', :with => "Portland, OR")
+      click_button('Update City')
+      expect(page).to have_content("Portland, OR")
+    end
+  end
 end
