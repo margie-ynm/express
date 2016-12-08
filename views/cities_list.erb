@@ -1,0 +1,15 @@
+<h1>All cities</h1>
+
+<ul>
+  <% @cities.each do |city| %>
+    <li><%= city.name %></li>
+  <% end %>
+</ul>
+
+<div id="new-city-form">
+  <form action="/cities" method="post">
+    <label for="new-city-name">City Name</label>
+    <input type="text" id="new-city-name" name="new-city-name">
+    <button type="submit" class="btn btn-success purple">Add City</button>
+  </form>
+</div>
