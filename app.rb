@@ -47,3 +47,18 @@ delete('/cities/:id') do
   @city.delete()
   redirect "/cities"
 end
+
+get('/trains') do
+  @trains = Train.all
+  erb(:train_list)
+end
+
+post('/trains') do
+  Train.new({:name => params.fetch('new-train-name')}).save
+  redirect '/trains'
+end
+
+get('/trains/:id') do
+  @train = Train.find(params.fetch('id').to_i)
+  erb(:train_detail)
+end
