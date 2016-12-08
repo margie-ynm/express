@@ -23,6 +23,7 @@ class Train
   define_method(:save) do
     result = DB.exec("INSERT INTO trains (name) VALUES ('#{@name}') RETURNING id;")
     @id = result.first.fetch("id").to_i
+    self
   end
 
   define_method(:update) do |attrs|

@@ -6,13 +6,13 @@ require('spec_helper.rb')
 
 describe("Train RESTful routes", {:type => :feature}) do
   before(:each) do
-    @l_train = Train.new({:name => "L"}).save()
+    @l_train = Train.new({:name => "Locomotive"}).save()
   end
 
   describe("GET Trains") do
     it('shows a list of all of the trains') do
       visit("/trains")
-      expect(page).to have_content("L")
+      expect(page).to have_content("Locomotive")
     end
   end
 
@@ -29,16 +29,16 @@ describe("Train RESTful routes", {:type => :feature}) do
   describe("GET individual train") do
     it('allows a user to visit a single page for train') do
       visit("/trains/#{@l_train.id}")
-      expect(page).to have_content('L')
+      expect(page).to have_content('Locomotive')
     end
   end
 
   describe("PATCH train") do
     it('allows a user to update a train') do
       visit("/trains/#{@l_train.id}")
-      fill_in('train-name', :with => "L")
+      fill_in('train-name', :with => "Locomotive")
       click_button('Update Train')
-      expect(page).to have_content("L")
+      expect(page).to have_content("Locomotive")
     end
   end
 
@@ -47,6 +47,7 @@ describe("Train RESTful routes", {:type => :feature}) do
       visit("/trains/#{@l_train.id}")
       click_button('Delete Train')
       expect(page).not_to have_content(@l_train.name)
+      expect(Train.find(@l_train.id)).to eq(nil)
     end
   end
 end
