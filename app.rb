@@ -36,13 +36,14 @@ get('/cities/:id') do
   erb(:city_detail)
 end
 
-get('/cities/:id/edit') do
-  @city = City.find(params.fetch('id').to_i)
-  erb(:city_update)
-end
-
 patch('/cities/:id') do
   @city = City.find(params.fetch('id').to_i)
   @city.update({:name => params.fetch('city-name')})
   redirect "/cities/#{params.fetch('id')}"
+end
+
+delete('/cities/:id') do
+  @city = City.find(params.fetch('id').to_i)
+  @city.delete()
+  redirect "/cities"
 end
