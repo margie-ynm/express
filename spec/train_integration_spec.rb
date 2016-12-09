@@ -4,7 +4,7 @@ Capybara.app = Sinatra::Application
 set(:show_exceptions, false)
 require('spec_helper.rb')
 
-describe("Train RESTful routes", {:type => :feature}) do
+describe("Train Integration", {:type => :feature}) do
   before(:each) do
     @l_train = Train.new({:name => "Locomotive"}).save()
   end
@@ -50,4 +50,23 @@ describe("Train RESTful routes", {:type => :feature}) do
       expect(Train.find(@l_train.id)).to eq(nil)
     end
   end
+  describe('#update') do
+    it('let you add a city to a train') do
+      train = Train.new({:name => "Locomotive"}).save
+      portland = City.new({:name => 'Portland'}).save
+      seattle = City.new({:name => "Seattle"}).save
+      train.update({:city_ids => [portland.id, seattle.id]})
+      expect(train.cities).to eq([portland, seattle])
+    end
+  end
+  describe("#actors") do
+    it("returns all of the actors in a particular movie") do
+      train = Train.new({:name => "Locomotive"}).save
+      portland = City.new({:name => 'Portland'}).save
+      seattle = City.new({:name => "Seattle"}).save
+      train.update({:city_ids => [portland.id, seattle.id]})
+      expect(train.cities).to eq([portland, seattle])
+    end
+  end
+
 end
